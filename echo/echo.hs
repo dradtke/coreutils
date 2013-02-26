@@ -1,3 +1,6 @@
+{-
+ - $ runhaskell echo.hs hello world
+ -}
 import Data.List
 import System.Environment
 

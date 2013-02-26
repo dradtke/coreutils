@@ -1,3 +1,6 @@
+/*
+ * $ javac echo.java && java echo hello world
+ */
 public class echo {
 	public static void main(String[] args) {
 		StringBuilder output = new StringBuilder();

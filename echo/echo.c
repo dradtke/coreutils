@@ -1,3 +1,7 @@
+/*
+ * $ gcc -o echo echo.c && ./echo hello world
+ */
+
 #include <stdio.h>
 
 int main(int argc, char *argv[])

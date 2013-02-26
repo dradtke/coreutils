@@ -1,3 +1,4 @@
+// $ go run echo.go hello world
 package main
 
 import (
