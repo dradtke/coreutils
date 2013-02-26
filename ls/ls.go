@@ -1,3 +1,4 @@
+// $ go run ls.go
 package main
 
 import (

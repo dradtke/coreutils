@@ -1,3 +1,7 @@
+/*
+ * $ gcc -o ls ls.c && ./ls
+ */
+
 #include <dirent.h>
 #include <errno.h>
 #include <stdio.h>

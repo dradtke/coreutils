@@ -1,3 +1,5 @@
+# $ tclsh ls.tcl
+
 proc ldelete { lyst elem } {
 	set idx [lsearch $lyst $elem]
 	return [lreplace $lyst $idx $idx]

@@ -1,3 +1,6 @@
+/*
+ * $ javac ls.java && java ls
+ */
 import java.io.File;
 
 public class ls {

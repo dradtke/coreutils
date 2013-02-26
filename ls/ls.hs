@@ -1,3 +1,4 @@
+-- $ runhaskell ls.hs
 import Prelude hiding (catch)
 import Control.Exception
 import Data.List
