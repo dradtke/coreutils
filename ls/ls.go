@@ -15,7 +15,6 @@ func list_files(dir string) {
 
 	defer d.Close()
 
-	// NOTE: this could be done in batches to make it more efficient
 	files, err := d.Readdir(0)
 	if err != nil {
 		fmt.Printf("%s\n", err.Error())
