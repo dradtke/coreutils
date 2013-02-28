@@ -23,6 +23,6 @@ removeDotDirs = filter (\x -> not $ x `elem` [".", ".."])
 main = do args <- getArgs
           if length args == 0
                   then listFiles "." >>= putStr
-                  else do result <- mapM listFilesWithHeader args
-                          let output = intersperse "\n" result
-                          mapM_ putStr output
+                  else do text <- mapM listFilesWithHeader args
+                          let text' = intersperse "\n" text
+                          mapM_ putStr text'
