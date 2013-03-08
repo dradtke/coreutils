@@ -1,6 +1,4 @@
 -- $ runhaskell echo.hs hello world
-import Data.List
-import System.Environment
+import System.Environment (getArgs)
 
-main = do args <- getArgs
-          putStrLn $ unwords args
+main = fmap unwords getArgs >>= putStrLn
