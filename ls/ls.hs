@@ -1,28 +1,22 @@
 -- $ runhaskell ls.hs
-import Prelude hiding (catch)
-import Control.Exception
-import Data.List
-import System.Directory
-import System.Environment
+import Control.Monad          (liftM)
+import Control.Exception as E (catch)
+import Data.List              (intersperse)
+import System.Directory       (getDirectoryContents)
+import System.Environment     (getArgs)
 
 listFiles :: FilePath -> IO String
-listFiles dir = catch f handler
-        where f = do files <- fmap removeDotDirs $ getDirectoryContents dir
-                     return $ unlines files
-
+listFiles dir = E.catch f handler
+        where f = fmap (unlines . removeDotDirectories) $ getDirectoryContents dir
               handler e = return $ show (e :: IOError) ++ "\n"
 
 listFilesWithHeader :: FilePath -> IO String
-listFilesWithHeader dir = do
-        files <- listFiles dir
-        return $ "[" ++ dir ++ "]\n" ++ files
+listFilesWithHeader dir = liftM (("[" ++ dir ++ "]\n") ++) $ listFiles dir
 
-removeDotDirs :: [FilePath] -> [FilePath]
-removeDotDirs = filter (\x -> not $ x `elem` [".", ".."])
+removeDotDirectories :: [FilePath] -> [FilePath]
+removeDotDirectories = filter (\x -> not $ x `elem` [".", ".."])
 
 main = do args <- getArgs
-          if length args == 0
-                  then listFiles "." >>= putStr
-                  else do text <- mapM listFilesWithHeader args
-                          let text' = intersperse "\n" text
-                          mapM_ putStr text'
+          case null args of
+              True  -> putStr =<< listFiles "."
+              False -> mapM_ putStr =<< (mapM listFilesWithHeader args >>= return . intersperse "\n")
